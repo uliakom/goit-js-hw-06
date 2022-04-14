@@ -1,19 +1,5 @@
 
 
-//Створить окремий елемент <li>. Обов'язково використовуй метод document.createElement().
-// Додасть назву інгредієнта як його текстовий вміст.
-// Додасть елементу клас item.
-// Після чого, вставить усі <li> за одну операцію у список ul.ingredients.
-
-
-function createList(items) {
-  const listing = document.createElement('li');
-  // const elementToAdd = listing.classList.add('item');
-  // console.log(elementToAdd);
-  const newArray = items.map((item) => listing.textContent=`${item}` )
-  return newArray;
-}
-
 const ingredients = [
   'Potatoes',
   'Mushrooms',
@@ -23,12 +9,20 @@ const ingredients = [
   'Condiments',
 ];
 
-console.log(createList(ingredients));
+const createList = items =>
+  items.map(item => {
+    const ingrediantElement = document.createElement('li');
+    ingrediantElement.textContent = item;
+    ingrediantElement.classList.add('item');
+    return ingrediantElement;
+  }
+  );
+
+const ingrediantsToAdd = createList(ingredients);
+const listOfIngredients = document.getElementById('ingredients');
+listOfIngredients.append(...ingrediantsToAdd);
 
 
 
 
-// const addedList = ingredients.map((item, i) =>
-//   document.createAttribute('li').textContent = `${item[i]}`
-// )
-//   console.log(addedList);
+
