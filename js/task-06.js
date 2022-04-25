@@ -16,9 +16,11 @@ const onInputChange = (event) => {
 const onInputCheck = (event) => {
     if (event.currentTarget.value.length === Number (inputText.dataset.length)) {
         inputText.classList.add('valid');
+        inputText.classList.remove('invalid');
     }
     else {
         inputText.classList.add('invalid');
+        inputText.classList.remove('valid');
         console.log(inputText.dataset.length);
         console.log(event.currentTarget.value.length);
     }

@@ -1,54 +1,37 @@
+
 function getRandomHexColor() {
   return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 }
 
-
-const inputContainer = document.querySelector('#controls');
 const btnCreate = document.querySelector('[data-create]');
 const btnDestroy = document.querySelector('[data-destroy]');
 const inputValue = document.querySelector('#controls input');
+const boxContainer = document.getElementById('boxes');
 
 
-const boxElements = [];
-
-
-const createBoxes = (amount) => {
-  let width = 30;
-  let height = 30;
-  for (let i = 1; i <= amount; i += 1) {
+const onBtnCreateClick = (event) => {
+  for (let i = 0; i < inputValue.value; i += 1) {
     const divEl = document.createElement('div');
-    divEl.classList.add('boxes');
-    width += 10;
-    height += 10;
-    divEl.style.width = `${width}px`;
-    divEl.style.height = `${height}px`;
-    divEl.style.backgroundColor = getRandomHexColor();
-    divEl.style.marginTop = '15px';
-    boxElements.push(divEl);
+    boxContainer.append(divEl);
   }
-};
-
-
-inputValue.addEventListener('change', onInputClick);
-
-function onInputClick (event) {
-  const boxesToAdd = event.currentTarget.value;
-  return createBoxes(boxesToAdd);
-}
-
-
-const onBtnCreateClick = () => {
-  inputContainer.append(...boxElements);
+  const divArrayEl = boxContainer.children;
+  const divSize = 30;
+  for (let i = 0; i < divArrayEl.length; i += 1) {
+    divArrayEl[i].style.width = `${divSize + 10 * i}px`;
+    divArrayEl[i].style.height = `${divSize + 10 * i}px`;
+    divArrayEl[i].style.backgroundColor = getRandomHexColor();
+    divArrayEl[i].style.marginTop = '15px';
+  }
+  inputValue.value = "";
 };
 
 btnCreate.addEventListener('click', onBtnCreateClick);
 
 const destroyBoxes = () => {
-  const addedBoxes = document.querySelectorAll('.boxes');
+  const addedBoxes = document.querySelectorAll('#boxes > div');
   for (const box of addedBoxes) {
     box.remove();
   }
-  inputValue.value = '';
   }
 
 const onBtnDestroyClick = () => {
@@ -56,9 +39,6 @@ const onBtnDestroyClick = () => {
 };
 
 btnDestroy.addEventListener('click', onBtnDestroyClick);
-
-
-
 
 
 
